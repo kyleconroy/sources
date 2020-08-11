@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package core;
+
+import "google/protobuf/any.proto";
+
+message Card {
+  string id = 1;
+}
+
+message ACH {
+  string id = 1;
+}
+
+// https://developers.google.com/protocol-buffers/docs/proto3#any
+message TxAnySource {
+  int64 amount = 1;
+  google.protobuf.Any source = 2;
+}
+
+// https://developers.google.com/protocol-buffers/docs/proto3#oneof
+message TxOneOfSource {
+  int64 amount = 1;
+  oneof source {
+    Card card = 2;
+    ACH ach = 3;
+  }
+}
